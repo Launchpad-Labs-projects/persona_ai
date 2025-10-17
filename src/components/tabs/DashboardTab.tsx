@@ -1,4 +1,4 @@
-import { Activity, TrendingUp, Clock, MapPin, Car, Circle } from "lucide-react";
+import { Activity, TrendingUp, Clock, MapPin, Car, Circle, AlertTriangle } from "lucide-react";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
 
@@ -103,6 +103,31 @@ export const DashboardTab = () => {
               </div>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Running Late Detection Section */}
+      <div className="bg-[#FEF3C7] rounded-lg p-5 shadow-md border-l-4 border-l-red-500">
+        <div className="flex items-start gap-3">
+          <div className="p-2 bg-red-100 rounded-lg flex-shrink-0">
+            <AlertTriangle className="h-5 w-5 text-red-600" />
+          </div>
+          
+          <div className="flex-1">
+            <h3 className="text-lg font-bold text-gray-900 mb-2">You're running late!</h3>
+            <p className="text-sm text-gray-700 mb-4">
+              You're running 15 min late to dinner. Book an Uber to arrive on time? Or notify Sarah and Mike?
+            </p>
+            
+            <div className="flex flex-wrap gap-3">
+              <button className="px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium text-sm hover:bg-primary/90 transition-colors duration-fast shadow-sm">
+                Book Uber
+              </button>
+              <button className="px-4 py-2 border-2 border-primary text-primary rounded-lg font-medium text-sm hover:bg-primary/5 transition-colors duration-fast">
+                Notify Friends
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
