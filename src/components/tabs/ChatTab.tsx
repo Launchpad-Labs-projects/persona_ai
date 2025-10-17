@@ -20,21 +20,51 @@ const initialMessages = [
   },
   {
     id: 3,
-    sender: "thinking",
-    text: "Persona is thinking...",
-    timestamp: "",
-  },
-  {
-    id: 4,
     sender: "user",
     text: "Perfect, go ahead",
     timestamp: "2:32 PM",
   },
   {
-    id: 5,
+    id: 4,
     sender: "persona",
     text: "Done! I've booked a table for 2 at Bistro Park for Thursday 7pm. Calendar invite sent to both you and John.",
     timestamp: "2:33 PM",
+  },
+  {
+    id: 5,
+    sender: "user",
+    text: "What's my schedule looking like tomorrow?",
+    timestamp: "2:35 PM",
+  },
+  {
+    id: 6,
+    sender: "thinking",
+    text: "Analyzing your calendar and schedule...",
+    timestamp: "",
+  },
+  {
+    id: 7,
+    sender: "persona",
+    text: "You have 4 events tomorrow:\n\n**Client call** at 9am (45 min)\n**Lunch** at 12:30pm\n**Gym** at 6pm\n**Dinner with Sarah** at 7:30pm\n\nYou'll have a 2-hour gap around 3pm.",
+    timestamp: "2:36 PM",
+  },
+  {
+    id: 8,
+    sender: "user",
+    text: "Great, can you suggest something for that gap?",
+    timestamp: "2:37 PM",
+  },
+  {
+    id: 9,
+    sender: "thinking",
+    text: "Finding activities near your location based on your preferences...",
+    timestamp: "",
+  },
+  {
+    id: 10,
+    sender: "persona",
+    text: "Based on your saved interests, I found:\n\n**Powell's Books** is 2 blocks away, or **Blue Bottle Coffee** with good wifi. Both are 15-20 min from your 3pm location.",
+    timestamp: "2:38 PM",
   },
 ];
 
@@ -76,7 +106,8 @@ export const ChatTab = () => {
         </div>
 
         {/* Chat Messages Area */}
-        <div className="flex-1 overflow-y-auto space-y-4 mb-4 pr-2">
+        <div className="flex-1 overflow-y-auto space-y-4 mb-4 pr-2 flex flex-col-reverse">
+          <div className="space-y-4">
           {messages.map((message) => {
             // Thinking state message
             if (message.sender === "thinking") {
@@ -136,7 +167,11 @@ export const ChatTab = () => {
                         : "bg-muted text-foreground rounded-tl-sm rounded-tr-xl rounded-bl-xl rounded-br-xl"
                     }`}
                   >
-                    <p className="text-sm leading-relaxed">{message.text}</p>
+                    <p className="text-sm leading-relaxed whitespace-pre-line">
+                      {message.text.split('**').map((part, index) => 
+                        index % 2 === 1 ? <strong key={index}>{part}</strong> : part
+                      )}
+                    </p>
                     
                     {/* TTS Button for Persona messages */}
                     {message.sender === "persona" && (
@@ -168,6 +203,7 @@ export const ChatTab = () => {
               </div>
             );
           })}
+          </div>
         </div>
 
         {/* Chat Input Area */}
