@@ -1,4 +1,4 @@
-import { Activity, TrendingUp, Clock, MapPin, Car, Circle, AlertTriangle } from "lucide-react";
+import { Activity, TrendingUp, Clock, MapPin, Car, Circle, AlertTriangle, Lightbulb, Bell, X } from "lucide-react";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
 
@@ -42,8 +42,40 @@ const trafficColors = {
   heavy: "text-red-500",
 };
 
+const patternInsights = [
+  {
+    id: 1,
+    text: "You grab coffee before 9am client meetings",
+    stat: "80% of the time",
+  },
+  {
+    id: 2,
+    text: "You're usually at the gym Tue/Thu at 6am but missed last 2 weeks",
+    stat: "Usually 80% consistent",
+  },
+];
+
+const initialNotifications = [
+  {
+    id: 1,
+    icon: MapPin,
+    message: "You have 45 minutes before your next meeting and you're near Powell's Books (on your saved list)",
+  },
+  {
+    id: 2,
+    icon: Bell,
+    message: "Grocery store closes in 1 hour and you're nearby",
+  },
+  {
+    id: 3,
+    icon: Lightbulb,
+    message: "Traffic is lighter than usual on your route home - leave now to save 15 minutes",
+  },
+];
+
 export const DashboardTab = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [notifications, setNotifications] = useState(initialNotifications);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -52,6 +84,10 @@ export const DashboardTab = () => {
 
     return () => clearInterval(timer);
   }, []);
+
+  const dismissNotification = (id: number) => {
+    setNotifications(notifications.filter(notif => notif.id !== id));
+  };
 
   return (
     <div className="space-y-6 animate-fade-in">
@@ -128,6 +164,59 @@ export const DashboardTab = () => {
               </button>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Pattern Insights Section */}
+      <div>
+        <h3 className="text-xl font-bold text-foreground mb-4">Your Patterns</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {patternInsights.map((insight) => (
+            <div
+              key={insight.id}
+              className="bg-card rounded-lg p-5 shadow-md border border-border hover:shadow-lg transition-shadow duration-fast"
+            >
+              <div className="flex items-start gap-3">
+                <div className="p-2 bg-accent/10 rounded-lg flex-shrink-0">
+                  <Lightbulb className="h-5 w-5 text-accent" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm text-foreground mb-2">{insight.text}</p>
+                  <p className="text-xs font-semibold text-accent">{insight.stat}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Smart Notifications Panel */}
+      <div>
+        <h3 className="text-xl font-bold text-foreground mb-4">Recent Suggestions</h3>
+        <div className="space-y-3">
+          {notifications.map((notification) => {
+            const Icon = notification.icon;
+            return (
+              <div
+                key={notification.id}
+                className="bg-muted/50 rounded-lg p-3 border-l-4 border-l-primary shadow-sm hover:shadow-md transition-shadow duration-fast"
+              >
+                <div className="flex items-start gap-3">
+                  <div className="p-1.5 bg-primary/10 rounded-lg flex-shrink-0">
+                    <Icon className="h-4 w-4 text-primary" />
+                  </div>
+                  <p className="text-sm text-foreground flex-1">{notification.message}</p>
+                  <button
+                    onClick={() => dismissNotification(notification.id)}
+                    className="p-1 hover:bg-muted rounded transition-colors duration-fast flex-shrink-0"
+                    aria-label="Dismiss notification"
+                  >
+                    <X className="h-4 w-4 text-muted-foreground hover:text-foreground" />
+                  </button>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
 
