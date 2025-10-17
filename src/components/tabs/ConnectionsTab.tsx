@@ -1,8 +1,31 @@
-import { UserPlus, Eye, Calendar, Users, MoreVertical } from "lucide-react";
+import { UserPlus, Eye, Calendar, Users, MoreVertical, MapPin, Clock } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+
+const coordinationRequests = [
+  {
+    id: 1,
+    user: { name: "Sarah Chen", initials: "SC" },
+    activity: "Coffee at Blue Bottle?",
+    details: "You and Sarah are both downtown with free time.",
+  },
+  {
+    id: 2,
+    user: { name: "Mike Rodriguez", initials: "MR" },
+    activity: "Dinner at Bistro Park?",
+    details: "You and Mike are both free Thursday 7pm. Reservation confirmed.",
+  },
+];
+
+const pendingInvites = [
+  {
+    id: 1,
+    recipient: "john.doe@email.com",
+    status: "Awaiting response",
+  },
+];
 
 const connections = [
   {
@@ -121,6 +144,73 @@ export const ConnectionsTab = () => {
                     <MoreVertical className="h-5 w-5 text-muted-foreground" />
                   </button>
                 )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Pending Coordination Section */}
+      <div>
+        <h3 className="text-lg font-semibold text-foreground mb-4">Pending Coordination Requests</h3>
+        <div className="space-y-3">
+          {coordinationRequests.map((request) => (
+            <div
+              key={request.id}
+              className="bg-blue-50 dark:bg-blue-950/20 rounded-lg p-4 border-l-4 border-primary"
+            >
+              <div className="flex items-start gap-3">
+                {/* Avatar */}
+                <Avatar className="h-10 w-10">
+                  <AvatarFallback className="bg-gradient-to-br from-primary to-secondary text-white text-sm">
+                    {request.user.initials}
+                  </AvatarFallback>
+                </Avatar>
+
+                <div className="flex-1">
+                  <p className="text-sm text-muted-foreground mb-1">{request.details}</p>
+                  <p className="font-semibold text-foreground mb-3">{request.activity}</p>
+
+                  <div className="flex items-center gap-2">
+                    <Button className="bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-4">
+                      Approve
+                    </Button>
+                    <Button variant="outline" className="h-9 px-4">
+                      Decline
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Pending Invites Section */}
+      <div>
+        <h3 className="text-lg font-semibold text-foreground mb-4">Pending Invites</h3>
+        <div className="space-y-3">
+          {pendingInvites.map((invite) => (
+            <div
+              key={invite.id}
+              className="bg-muted/50 rounded-lg p-3 shadow-sm"
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-foreground">
+                    Invite sent to: <span className="text-muted-foreground">{invite.recipient}</span>
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-1">{invite.status}</p>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <Button variant="outline" size="sm" className="h-8 text-xs">
+                    Resend
+                  </Button>
+                  <Button variant="outline" size="sm" className="h-8 text-xs text-muted-foreground">
+                    Cancel
+                  </Button>
+                </div>
               </div>
             </div>
           ))}
