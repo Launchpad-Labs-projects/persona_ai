@@ -1,5 +1,7 @@
 import { MapPin, Plus, Circle, CheckCircle2, MoreVertical } from "lucide-react";
 import { useState } from "react";
+import { CreateReminderModal } from "@/components/modals/CreateReminderModal";
+import { toast } from "@/hooks/use-toast";
 
 interface Reminder {
   id: number;
@@ -41,8 +43,24 @@ const initialReminders: Reminder[] = [
 ];
 
 export const RemindersTab = () => {
-  const [reminders] = useState(initialReminders);
+  const [reminders, setReminders] = useState(initialReminders);
   const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleCreateReminder = (reminder: { text: string; location: string; distance: string }) => {
+    const newReminder: Reminder = {
+      id: reminders.length + 1,
+      text: reminder.text,
+      location: reminder.location,
+      distance: reminder.distance,
+      completed: false,
+    };
+    setReminders([...reminders, newReminder]);
+    toast({
+      title: "Reminder created!",
+      description: `You'll be notified when near ${reminder.location}`,
+    });
+  };
 
   return (
     <div className="space-y-6 animate-fade-in">
@@ -53,10 +71,20 @@ export const RemindersTab = () => {
       </div>
 
       {/* Create Reminder Button */}
-      <button className="inline-flex items-center gap-2 px-5 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors duration-fast shadow-md">
+      <button
+        onClick={() => setIsModalOpen(true)}
+        className="inline-flex items-center gap-2 px-5 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors duration-fast shadow-md hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      >
         <Plus className="h-5 w-5" />
         Create Reminder
       </button>
+
+      {/* Create Reminder Modal */}
+      <CreateReminderModal
+        open={isModalOpen}
+        onOpenChange={setIsModalOpen}
+        onCreateReminder={handleCreateReminder}
+      />
 
       {/* Reminders List */}
       <div className="space-y-3">
@@ -65,7 +93,7 @@ export const RemindersTab = () => {
             key={reminder.id}
             onMouseEnter={() => setHoveredId(reminder.id)}
             onMouseLeave={() => setHoveredId(null)}
-            className={`bg-card rounded-lg p-4 shadow-md border border-border hover:shadow-lg transition-all duration-fast ${
+            className={`bg-card rounded-lg p-4 shadow-md border border-border hover:shadow-xl hover:scale-[1.01] transition-all duration-base ${
               reminder.completed ? "opacity-60" : ""
             }`}
           >
@@ -105,10 +133,10 @@ export const RemindersTab = () => {
                 {/* Status Badge */}
                 <div className="mt-2">
                   <span
-                    className={`inline-block px-2 py-1 text-xs font-medium rounded ${
+                    className={`inline-block px-2 py-1 text-xs font-medium rounded-md ${
                       reminder.completed
-                        ? "bg-green-100 text-green-700"
-                        : "bg-blue-100 text-blue-700"
+                        ? "bg-success/10 text-success"
+                        : "bg-primary/10 text-primary"
                     }`}
                   >
                     {reminder.completed ? "Completed" : "Active"}
@@ -118,7 +146,7 @@ export const RemindersTab = () => {
 
               {/* Three Dots Menu */}
               <button
-                className={`p-2 hover:bg-muted rounded-lg transition-opacity duration-fast ${
+                className={`p-2 hover:bg-muted rounded-lg transition-all duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                   hoveredId === reminder.id ? "opacity-100" : "opacity-0"
                 }`}
               >

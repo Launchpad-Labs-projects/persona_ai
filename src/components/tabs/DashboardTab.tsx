@@ -92,7 +92,7 @@ export const DashboardTab = () => {
   return (
     <div className="space-y-6 animate-fade-in">
       {/* Header Section */}
-      <div className="bg-card rounded-xl p-6 shadow-md border border-border">
+      <div className="bg-card rounded-xl p-6 shadow-md border border-border hover:shadow-lg transition-all duration-base">
         <h2 className="text-3xl font-bold text-foreground mb-1">{getGreeting()}</h2>
         <p className="text-muted-foreground mb-3">Hi, Welcome back</p>
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -108,7 +108,7 @@ export const DashboardTab = () => {
           {upcomingEvents.map((event) => (
             <div
               key={event.id}
-              className="bg-card rounded-lg p-4 shadow-md border-l-4 border-l-primary hover:shadow-lg transition-shadow duration-fast"
+              className="bg-card rounded-lg p-4 shadow-md border-l-4 border-l-primary hover:shadow-xl hover:scale-[1.01] transition-all duration-base"
             >
               <h4 className="font-bold text-foreground text-lg mb-3">{event.name}</h4>
               
@@ -156,10 +156,10 @@ export const DashboardTab = () => {
             </p>
             
             <div className="flex flex-wrap gap-3">
-              <button className="px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium text-sm hover:bg-primary/90 transition-colors duration-fast shadow-sm">
+              <button className="px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium text-sm hover:bg-primary/90 hover:shadow-md transition-all duration-fast shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
                 Book Uber
               </button>
-              <button className="px-4 py-2 border-2 border-primary text-primary rounded-lg font-medium text-sm hover:bg-primary/5 transition-colors duration-fast">
+              <button className="px-4 py-2 border-2 border-primary text-primary rounded-lg font-medium text-sm hover:bg-primary/5 transition-all duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
                 Notify Friends
               </button>
             </div>
@@ -174,7 +174,7 @@ export const DashboardTab = () => {
           {patternInsights.map((insight) => (
             <div
               key={insight.id}
-              className="bg-card rounded-lg p-5 shadow-md border border-border hover:shadow-lg transition-shadow duration-fast"
+              className="bg-card rounded-lg p-5 shadow-md border border-border hover:shadow-xl hover:scale-[1.01] transition-all duration-base"
             >
               <div className="flex items-start gap-3">
                 <div className="p-2 bg-accent/10 rounded-lg flex-shrink-0">
@@ -199,7 +199,7 @@ export const DashboardTab = () => {
             return (
               <div
                 key={notification.id}
-                className="bg-muted/50 rounded-lg p-3 border-l-4 border-l-primary shadow-sm hover:shadow-md transition-shadow duration-fast"
+                className="bg-muted/50 rounded-lg p-3 border-l-4 border-l-primary shadow-sm hover:shadow-lg transition-all duration-base"
               >
                 <div className="flex items-start gap-3">
                   <div className="p-1.5 bg-primary/10 rounded-lg flex-shrink-0">
@@ -208,7 +208,7 @@ export const DashboardTab = () => {
                   <p className="text-sm text-foreground flex-1">{notification.message}</p>
                   <button
                     onClick={() => dismissNotification(notification.id)}
-                    className="p-1 hover:bg-muted rounded transition-colors duration-fast flex-shrink-0"
+                    className="p-1 hover:bg-muted rounded transition-all duration-fast flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     aria-label="Dismiss notification"
                   >
                     <X className="h-4 w-4 text-muted-foreground hover:text-foreground" />
@@ -222,7 +222,7 @@ export const DashboardTab = () => {
 
       {/* Stats Section */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-card rounded-xl p-6 shadow-md border border-border">
+        <div className="bg-card rounded-xl p-6 shadow-md border border-border hover:shadow-lg hover:scale-[1.01] transition-all duration-base">
           <div className="flex items-center gap-3 mb-2">
             <div className="p-2 bg-primary/10 rounded-lg">
               <Activity className="h-5 w-5 text-primary" />
@@ -233,7 +233,7 @@ export const DashboardTab = () => {
           <p className="text-sm text-muted-foreground mt-1">Active tasks</p>
         </div>
 
-        <div className="bg-card rounded-xl p-6 shadow-md border border-border">
+        <div className="bg-card rounded-xl p-6 shadow-md border border-border hover:shadow-lg hover:scale-[1.01] transition-all duration-base">
           <div className="flex items-center gap-3 mb-2">
             <div className="p-2 bg-secondary/10 rounded-lg">
               <TrendingUp className="h-5 w-5 text-secondary" />
@@ -244,7 +244,7 @@ export const DashboardTab = () => {
           <p className="text-sm text-muted-foreground mt-1">Completion rate</p>
         </div>
 
-        <div className="bg-card rounded-xl p-6 shadow-md border border-border">
+        <div className="bg-card rounded-xl p-6 shadow-md border border-border hover:shadow-lg hover:scale-[1.01] transition-all duration-base">
           <div className="flex items-center gap-3 mb-2">
             <div className="p-2 bg-accent/10 rounded-lg">
               <Clock className="h-5 w-5 text-accent" />
@@ -256,11 +256,11 @@ export const DashboardTab = () => {
         </div>
       </div>
 
-      <div className="bg-card rounded-xl p-6 shadow-md border border-border">
+      <div className="bg-card rounded-xl p-6 shadow-md border border-border hover:shadow-lg transition-all duration-base">
         <h3 className="font-semibold text-foreground mb-4">Recent Activity</h3>
         <div className="space-y-3">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="flex items-center gap-3 p-3 bg-muted/50 rounded-lg">
+            <div key={i} className="flex items-center gap-3 p-3 bg-muted/50 rounded-lg hover:bg-muted transition-colors duration-fast">
               <div className="h-2 w-2 bg-primary rounded-full"></div>
               <p className="text-sm text-foreground flex-1">Activity item {i}</p>
               <span className="text-xs text-muted-foreground">2h ago</span>

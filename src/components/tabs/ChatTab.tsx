@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useState } from "react";
+import { toast } from "@/hooks/use-toast";
 
 const initialMessages = [
   {
@@ -75,7 +76,10 @@ export const ChatTab = () => {
 
   const handleSend = () => {
     if (inputValue.trim()) {
-      // Handle send message
+      toast({
+        title: "Message sent!",
+        description: "Persona is processing your request",
+      });
       setInputValue("");
     }
   };

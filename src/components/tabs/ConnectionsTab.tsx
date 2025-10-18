@@ -3,6 +3,8 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { AddConnectionModal } from "@/components/modals/AddConnectionModal";
+import { toast } from "@/hooks/use-toast";
 
 const coordinationRequests = [
   {
@@ -56,6 +58,19 @@ const connections = [
 
 export const ConnectionsTab = () => {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleAddConnection = (connection: {
+    name: string;
+    email: string;
+    relationship: string;
+    permissions: string[];
+  }) => {
+    toast({
+      title: "Connection invited!",
+      description: `Invitation sent to ${connection.email}`,
+    });
+  };
 
   const getPermissionIcon = (permission: string) => {
     switch (permission) {
@@ -80,11 +95,21 @@ export const ConnectionsTab = () => {
           <h2 className="text-2xl font-bold text-foreground mb-2">Your Connections</h2>
           <p className="text-muted-foreground">Manage friends, family, and colleagues</p>
         </div>
-        <Button className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg px-5 py-3">
+        <Button
+          onClick={() => setIsModalOpen(true)}
+          className="bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg rounded-lg px-5 py-3 transition-all duration-base"
+        >
           <UserPlus className="h-5 w-5 mr-2" />
           Add Connection
         </Button>
       </div>
+
+      {/* Add Connection Modal */}
+      <AddConnectionModal
+        open={isModalOpen}
+        onOpenChange={setIsModalOpen}
+        onAddConnection={handleAddConnection}
+      />
 
       {/* Active Connections Section */}
       <div>
@@ -93,7 +118,7 @@ export const ConnectionsTab = () => {
           {connections.map((connection) => (
             <div
               key={connection.id}
-              className="bg-card rounded-lg p-4 shadow-sm border border-border hover:shadow-md transition-shadow"
+              className="bg-card rounded-lg p-4 shadow-sm border border-border hover:shadow-lg hover:scale-[1.01] transition-all duration-base"
               onMouseEnter={() => setHoveredId(connection.id)}
               onMouseLeave={() => setHoveredId(null)}
             >
@@ -140,7 +165,7 @@ export const ConnectionsTab = () => {
 
                 {/* Menu Icon */}
                 {hoveredId === connection.id && (
-                  <button className="p-1 hover:bg-muted rounded transition-colors">
+                  <button className="p-1 hover:bg-muted rounded transition-all duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
                     <MoreVertical className="h-5 w-5 text-muted-foreground" />
                   </button>
                 )}
