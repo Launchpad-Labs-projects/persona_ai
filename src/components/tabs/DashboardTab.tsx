@@ -108,7 +108,7 @@ export const DashboardTab = () => {
           {upcomingEvents.map((event) => (
             <div
               key={event.id}
-              className="bg-card rounded-lg p-4 shadow-md border-l-4 border-l-primary hover:shadow-xl transition-all duration-base cursor-pointer"
+              className="bg-card rounded-lg p-4 shadow-md border-l-4 border-l-primary hover:shadow-lg transition-shadow duration-fast"
             >
               <h4 className="font-bold text-foreground text-lg mb-3">{event.name}</h4>
               
@@ -156,10 +156,10 @@ export const DashboardTab = () => {
             </p>
             
             <div className="flex flex-wrap gap-3">
-              <button className="px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium text-sm hover:bg-primary/90 transition-all duration-fast shadow-sm hover:shadow-md active:scale-95">
+              <button className="px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium text-sm hover:bg-primary/90 transition-colors duration-fast shadow-sm">
                 Book Uber
               </button>
-              <button className="px-4 py-2 border-2 border-primary text-primary rounded-lg font-medium text-sm hover:bg-primary/5 transition-all duration-fast active:scale-95">
+              <button className="px-4 py-2 border-2 border-primary text-primary rounded-lg font-medium text-sm hover:bg-primary/5 transition-colors duration-fast">
                 Notify Friends
               </button>
             </div>
@@ -174,7 +174,7 @@ export const DashboardTab = () => {
           {patternInsights.map((insight) => (
             <div
               key={insight.id}
-              className="bg-card rounded-lg p-5 shadow-md border border-border hover:shadow-xl hover:scale-[1.02] transition-all duration-base cursor-pointer"
+              className="bg-card rounded-lg p-5 shadow-md border border-border hover:shadow-lg transition-shadow duration-fast"
             >
               <div className="flex items-start gap-3">
                 <div className="p-2 bg-accent/10 rounded-lg flex-shrink-0">
@@ -199,7 +199,7 @@ export const DashboardTab = () => {
             return (
               <div
                 key={notification.id}
-                className="bg-muted/50 rounded-lg p-3 border-l-4 border-l-primary shadow-sm hover:shadow-md hover:bg-muted/70 transition-all duration-base cursor-pointer"
+                className="bg-muted/50 rounded-lg p-3 border-l-4 border-l-primary shadow-sm hover:shadow-md transition-shadow duration-fast"
               >
                 <div className="flex items-start gap-3">
                   <div className="p-1.5 bg-primary/10 rounded-lg flex-shrink-0">
@@ -221,8 +221,8 @@ export const DashboardTab = () => {
       </div>
 
       {/* Stats Section */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        <div className="bg-card rounded-xl p-6 shadow-md border border-border hover:shadow-xl transition-all duration-base">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="bg-card rounded-xl p-6 shadow-md border border-border">
           <div className="flex items-center gap-3 mb-2">
             <div className="p-2 bg-primary/10 rounded-lg">
               <Activity className="h-5 w-5 text-primary" />
@@ -233,7 +233,7 @@ export const DashboardTab = () => {
           <p className="text-sm text-muted-foreground mt-1">Active tasks</p>
         </div>
 
-        <div className="bg-card rounded-xl p-6 shadow-md border border-border hover:shadow-xl transition-all duration-base">
+        <div className="bg-card rounded-xl p-6 shadow-md border border-border">
           <div className="flex items-center gap-3 mb-2">
             <div className="p-2 bg-secondary/10 rounded-lg">
               <TrendingUp className="h-5 w-5 text-secondary" />
@@ -244,7 +244,7 @@ export const DashboardTab = () => {
           <p className="text-sm text-muted-foreground mt-1">Completion rate</p>
         </div>
 
-        <div className="bg-card rounded-xl p-6 shadow-md border border-border hover:shadow-xl transition-all duration-base">
+        <div className="bg-card rounded-xl p-6 shadow-md border border-border">
           <div className="flex items-center gap-3 mb-2">
             <div className="p-2 bg-accent/10 rounded-lg">
               <Clock className="h-5 w-5 text-accent" />

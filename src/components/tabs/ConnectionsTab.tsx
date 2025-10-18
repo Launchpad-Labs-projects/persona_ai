@@ -93,7 +93,7 @@ export const ConnectionsTab = () => {
           {connections.map((connection) => (
             <div
               key={connection.id}
-              className="bg-card rounded-lg p-4 shadow-sm border border-border hover:shadow-lg hover:scale-[1.01] transition-all duration-base cursor-pointer"
+              className="bg-card rounded-lg p-4 shadow-sm border border-border hover:shadow-md transition-shadow"
               onMouseEnter={() => setHoveredId(connection.id)}
               onMouseLeave={() => setHoveredId(null)}
             >
