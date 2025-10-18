@@ -5,6 +5,7 @@ import { RemindersTab } from "@/components/tabs/RemindersTab";
 import { SuggestionsTab } from "@/components/tabs/SuggestionsTab";
 import { ConnectionsTab } from "@/components/tabs/ConnectionsTab";
 import { ChatTab } from "@/components/tabs/ChatTab";
+import { FloatingChatWidget } from "@/components/FloatingChatWidget";
 import { Sparkles } from "lucide-react";
 
 const Index = () => {
@@ -51,6 +52,9 @@ const Index = () => {
 
       {/* Bottom Navigation */}
       <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
+
+      {/* Floating Chat Widget - Available on all tabs */}
+      {activeTab !== "chat" && <FloatingChatWidget />}
     </div>
   );
 };
