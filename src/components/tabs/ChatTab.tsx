@@ -93,7 +93,7 @@ export const ChatTab = () => {
 
   return (
     <TooltipProvider>
-      <div className="flex flex-col h-[calc(100vh-12rem)] animate-fade-in">
+    <div className="flex flex-col h-[calc(100vh-12rem)] animate-fade-in">
         {/* Header Section */}
         <div className="flex items-center justify-between mb-6">
           <div>

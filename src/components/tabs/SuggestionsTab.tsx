@@ -70,7 +70,7 @@ export const SuggestionsTab = () => {
         return (
           <div
             key={suggestion.id}
-            className="bg-card rounded-lg p-4 shadow-md border-l-4 border-l-primary hover:shadow-lg transition-shadow duration-fast"
+            className="bg-card rounded-lg p-4 shadow-md border-l-4 border-l-primary hover:shadow-xl hover:scale-[1.01] transition-all duration-base"
             style={{
               borderImage: "linear-gradient(to bottom, hsl(var(--primary)), hsl(var(--secondary))) 1",
             }}
@@ -85,13 +85,13 @@ export const SuggestionsTab = () => {
             <div className="flex gap-3">
               <button
                 onClick={() => handleAccept(suggestion.id)}
-                className="flex-1 px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium text-sm hover:bg-primary/90 transition-colors duration-fast"
+                className="flex-1 px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium text-sm hover:bg-primary/90 transition-all duration-fast active:scale-95"
               >
                 Accept
               </button>
               <button
                 onClick={() => handleDismiss(suggestion.id)}
-                className="flex-1 px-4 py-2 border-2 border-primary text-primary rounded-lg font-medium text-sm hover:bg-primary/5 transition-colors duration-fast"
+                className="flex-1 px-4 py-2 border-2 border-primary text-primary rounded-lg font-medium text-sm hover:bg-primary/5 transition-all duration-fast active:scale-95"
               >
                 Dismiss
               </button>

@@ -53,7 +53,7 @@ export const RemindersTab = () => {
       </div>
 
       {/* Create Reminder Button */}
-      <button className="inline-flex items-center gap-2 px-5 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors duration-fast shadow-md">
+      <button className="inline-flex items-center gap-2 px-5 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all duration-fast shadow-md hover:shadow-lg active:scale-95">
         <Plus className="h-5 w-5" />
         Create Reminder
       </button>
@@ -65,7 +65,7 @@ export const RemindersTab = () => {
             key={reminder.id}
             onMouseEnter={() => setHoveredId(reminder.id)}
             onMouseLeave={() => setHoveredId(null)}
-            className={`bg-card rounded-lg p-4 shadow-md border border-border hover:shadow-lg transition-all duration-fast ${
+            className={`bg-card rounded-lg p-4 shadow-md border border-border hover:shadow-xl hover:scale-[1.01] transition-all duration-base cursor-pointer ${
               reminder.completed ? "opacity-60" : ""
             }`}
           >
